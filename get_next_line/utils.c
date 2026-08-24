@@ -1,5 +1,20 @@
 #include "gnl.h"
 
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	unsigned char	*ar;
+
+	if (nmemb == 0 || size == 0)
+		return (ft_strdup(""));
+	if (nmemb > ((size_t) -1) / size)
+		return (NULL);
+	ar = (unsigned char *)malloc(nmemb * size);
+	if (!ar)
+		return (NULL);
+	ft_bzero(ar, (nmemb * size));
+	return (ar);
+}
+
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	size_t			i;
@@ -10,7 +25,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	slen = ft_strlen(s);
 	if (start >= slen || len == 0)
-		return (malloc(0));
+		return (ft_calloc(1, 1);
 	if (len > slen - start)
 		len = slen - start;
 	ar = (char *)malloc(len + 1);
