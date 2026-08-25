@@ -38,7 +38,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	slen = ft_strlen(s);
 	if (start >= slen || len == 0)
-		return (ft_strdup("");
+		return (ft_strdup(""));
 	if (len > slen - start)
 		len = slen - start;
 	ar = (char *)malloc(len + 1);
@@ -80,7 +80,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		s1 = "";
 	if (!s2)
 		s2 = "";
-	ar = (char *)malloc(s1len + ft_strlen(s2) + 1);
+	ar = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!ar)
 		return (NULL);
 	i = 0;
