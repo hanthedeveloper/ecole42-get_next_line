@@ -54,6 +54,7 @@ char *get_next_line(int fd)
 			{
 				free(red);
 				free(hold);
+				hold = NULL;
 				return (line);
 			}
 			line = hold;
