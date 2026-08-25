@@ -75,23 +75,25 @@ char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*ar;
 	size_t	i;
+	int s1len;
 
+	s1len = ft_strlen(s1);
 	if (!s1)
 		s1 = "";
 	if (!s2)
 		s2 = "";
-	ar = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	ar = (char *)malloc(s1len + ft_strlen(s2) + 1);
 	if (!ar)
 		return (NULL);
 	i = 0;
-	while (i < ft_strlen(s1))
+	while (i < s1len)
 	{
 		ar[i] = s1[i];
 		i++;
 	}
-	while (s2[i - ft_strlen(s1)])
+	while (s2[i - s1len])
 	{
-		ar[i] = s2[i - (ft_strlen(s1))];
+		ar[i] = s2[i - s1len];
 		i++;
 	}
 	ar[i] = '\0';
