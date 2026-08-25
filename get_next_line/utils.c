@@ -1,5 +1,15 @@
 #include "gnl.h"
 
+size_t	ft_strlen(const char *s)
+{
+	size_t	len;
+
+	len = 0;
+	while (s[len])
+		len++;
+	return (len);
+}
+
 char	*ft_strdup(const char *s)
 {
 	char	*ar;
@@ -28,7 +38,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	slen = ft_strlen(s);
 	if (start >= slen || len == 0)
-		return (ft_calloc(1, 1);
+		return (ft_strdup("");
 	if (len > slen - start)
 		len = slen - start;
 	ar = (char *)malloc(len + 1);
@@ -59,16 +69,6 @@ char	*ft_strchr(const char *s, int c)
 	if ((char)c == 0)
 		return ((char *)&s[i]);
 	return (NULL);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	len;
-
-	len = 0;
-	while (s[len])
-		len++;
-	return (len);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
