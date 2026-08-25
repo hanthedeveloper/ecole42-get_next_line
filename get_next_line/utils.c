@@ -1,17 +1,20 @@
 #include "gnl.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+char	*ft_strdup(const char *s)
 {
-	unsigned char	*ar;
+	char	*ar;
+	size_t	i;
 
-	if (nmemb == 0 || size == 0)
-		return (ft_strdup(""));
-	if (nmemb > ((size_t) -1) / size)
-		return (NULL);
-	ar = (unsigned char *)malloc(nmemb * size);
+	i = 0;
+	ar = (char *)malloc(ft_strlen(s) + 1);
 	if (!ar)
 		return (NULL);
-	ft_bzero(ar, (nmemb * size));
+	while (s[i])
+	{
+		ar[i] = s[i];
+		i++;
+	}
+	ar[i] = '\0';
 	return (ar);
 }
 
