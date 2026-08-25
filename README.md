@@ -13,10 +13,10 @@ throughout the curriculum.
 
 ## Instructions
 
-Compile the project from the `get_next_line` folder:
+Compile the project from the `get_next_line` folder after writing a main.c:
 
 ```sh
-cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 main.c gnl.c utils.c -o gnl
+cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 main.c get_next_line.c get_next_line_utils.c -o gnl
 ```
 
 The `BUFFER_SIZE` macro controls how many bytes are read from the file at
