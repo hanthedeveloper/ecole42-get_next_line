@@ -53,9 +53,9 @@ char *get_next_line(int fd)
 			if (!*hold)
 			{
 				free(red);
+				free(hold);
 				return (line);
 			}
-
 			line = hold;
 			hold = NULL;
 		}
