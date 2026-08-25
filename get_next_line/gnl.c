@@ -50,7 +50,7 @@ char *get_next_line(int fd)
 			break;
 		if (i == 0)
 		{
-			if (!hold)
+			if (!*hold)
 			{
 				free(red);
 				return (line);
