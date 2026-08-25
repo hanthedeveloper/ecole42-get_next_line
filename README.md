@@ -28,9 +28,6 @@ Run the resulting binary:
 ./gnl
 ```
 
-By default `main.c` opens a file named `dosya.txt` in the same directory
-and prints it out line by line using `get_next_line`.
-
 ## Project contents
 
 - **Core function:** `get_next_line` — returns the next line of a file
