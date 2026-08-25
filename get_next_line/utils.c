@@ -92,3 +92,30 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	ar[ft_strlen(s1) + ft_strlen(s2)] = '\0';
 	return (ar);
 }
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*ar;
+	size_t	i;
+
+	if (!s1)
+		s1 = "";
+	if (!s2)
+		s2 = "";
+	ar = (char *)malloc(s1len + ft_strlen(s2) + 1);
+	if (!ar)
+		return (NULL);
+	i = 0;
+	while (i < ft_strlen(s1))
+	{
+		ar[i] = s1[i];
+		i++;
+	}
+	while (s2[i - ft_strlen(s1)])
+	{
+		ar[i] = s2[i - (ft_strlen(s1))];
+		i++;
+	}
+	ar[i] = '\0';
+	return (ar);
+}
