@@ -48,7 +48,6 @@ static char	*ft_read(int i, int fd, char **hold)
 		i = read(fd, red, BUFFER_SIZE);
 		if (i == -1)
 		{
-			free(hold);
 			free(red);
 			return (0);
 		}
