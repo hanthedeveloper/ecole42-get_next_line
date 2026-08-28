@@ -39,7 +39,7 @@ static char	*ft_read(int i, int fd, char **hold)
 	char	*temp;
 	char	*line;
 
-	red = (char *)malloc(BUFFER_SIZE + 1);
+	red = (char *)malloc((size_t)BUFFER_SIZE + 1);
 	if (!red)
 		return (NULL);
 	line = NULL;
