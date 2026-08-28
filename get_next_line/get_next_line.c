@@ -12,14 +12,14 @@
 
 #include "get_next_line.h"
 #include "unistd.h"
-
+ 
 static char	*has_new_line(char **hold)
 {
 	char	*line;
 	char	*temp;
 	int		linelen;
 	char	*temph;
-
+ 
 	if (!*hold)
 		return (NULL);
 	temp = ft_strchr(*hold, '\n');
@@ -32,41 +32,39 @@ static char	*has_new_line(char **hold)
 	free(temph);
 	return (line);
 }
-
+ 
 static char	*ft_read(int i, int fd, char **hold)
 {
 	char	*red;
 	char	*temp;
 	char	*line;
-
+ 
+	line = has_new_line(hold);
+	if (line)
+		return (line);
 	red = (char *)malloc((size_t)BUFFER_SIZE + 1);
 	if (!red)
 		return (NULL);
-	line = NULL;
-	while (i != 0 && !line)
+	while (i != 0 && !ft_strchr(*hold, '\n'))
 	{
 		i = read(fd, red, BUFFER_SIZE);
 		if (i == -1)
-		{
-			free(red);
-			return (0);
-		}
+			return (free(red), free(*hold), *hold = NULL, NULL);
 		red[i] = '\0';
 		temp = *hold;
 		*hold = ft_strjoin(*hold, red);
 		free(temp);
-		line = has_new_line(hold);
 	}
 	free(red);
-	return (line);
+	return (has_new_line(hold));
 }
-
+ 
 char	*get_next_line(int fd)
 {
 	static char	*hold;
 	char		*line;
 	int			i;
-
+ 
 	i = 1;
 	line = ft_read(i, fd, &hold);
 	if (line)
@@ -81,3 +79,4 @@ char	*get_next_line(int fd)
 	hold = NULL;
 	return (line);
 }
+ 
