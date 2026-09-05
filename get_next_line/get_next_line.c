@@ -20,8 +20,6 @@ static char	*has_new_line(char **hold)
 	int		linelen;
 	char	*temph;
  
-	if (!*hold)
-		return (NULL);
 	temp = ft_strchr(*hold, NL);
 	if (!temp)
 		return (NULL);
