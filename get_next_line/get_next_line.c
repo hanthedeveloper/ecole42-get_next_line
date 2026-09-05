@@ -6,7 +6,7 @@
 /*   By: haincel <haincel@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 14:26:01 by haincel           #+#    #+#             */
-/*   Updated: 2026/08/25 14:47:01 by haincel          ###   ########.fr       */
+/*   Updated: 2026/09/05 13:43:49 by haincel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char	*has_new_line(char **hold)
  
 	if (!*hold)
 		return (NULL);
-	temp = ft_strchr(*hold, '\n');
+	temp = ft_strchr(*hold, NL);
 	if (!temp)
 		return (NULL);
 	linelen = temp - *hold;
@@ -45,7 +45,7 @@ static char	*ft_read(int i, int fd, char **hold)
 	red = (char *)malloc((size_t)BUFFER_SIZE + 1);
 	if (!red)
 		return (NULL);
-	while (i != 0 && !ft_strchr(*hold, '\n'))
+	while (i != 0 && !ft_strchr(*hold, NL))
 	{
 		i = read(fd, red, BUFFER_SIZE);
 		if (i == -1)
