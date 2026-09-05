@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   bonus.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haincel <haincel@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/25 14:26:01 by haincel           #+#    #+#             */
-/*   Updated: 2026/09/05 13:43:49 by haincel          ###   ########.fr       */
+/*   Created: 2026/09/05 14:29:24 by haincel           #+#    #+#             */
+/*   Updated: 2026/09/05 15:59:20 by haincel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include "unistd.h"
- 
+#include "bonus.h"
+
 static char	*has_new_line(char **hold)
 {
 	char	*line;
 	char	*temp;
 	int		linelen;
 	char	*temph;
- 
+
 	if (!*hold)
 		return (NULL);
 	temp = ft_strchr(*hold, NL);
@@ -32,13 +31,13 @@ static char	*has_new_line(char **hold)
 	free(temph);
 	return (line);
 }
- 
+
 static char	*ft_read(int i, int fd, char **hold)
 {
 	char	*red;
 	char	*temp;
 	char	*line;
- 
+
 	line = has_new_line(hold);
 	if (line)
 		return (line);
@@ -58,23 +57,56 @@ static char	*ft_read(int i, int fd, char **hold)
 	free(red);
 	return (has_new_line(hold));
 }
- 
-char	*get_next_line(int fd)
-{
-	static char	*hold;
-	char		*line;
 
-	line = ft_read(1, fd, &hold);
+static t_table	*ft_lstadd(t_table **lst, unsigned int fd, void *content)
+{
+	t_table	*nnode;
+
+	if (!lst)
+		return (NULL);
+	nnode = (t_table *)malloc(sizeof(t_table));
+	if (!nnode)
+		return (NULL);
+	nnode->fd = fd;
+	nnode->content = content;
+	nnode->next = *lst;
+	*lst = nnode;
+	return (nnode);
+}
+
+static t_table	*find_or_create_node(t_table **head, int fd)
+{
+	t_table	*temp;
+
+	temp = *head;
+	while (temp && temp->fd != (unsigned int)fd)
+		temp = temp->next;
+	if (!temp)
+		temp = ft_lstadd(head, fd, NULL);
+	return (temp);
+}
+
+char	*get_next_line_bonus(int fd)
+{
+	static t_table	*head;
+	t_table			*temp;
+	char			*line;
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	temp = find_or_create_node(&head, fd);
+	if (!temp)
+		return (NULL);
+	line = ft_read(1, fd, (char **)&temp->content);
 	if (line)
 		return (line);
-	if (!hold || !*hold)
+	if (!temp->content || !*(char *)temp->content)
 	{
-		free(hold);
-		hold = NULL;
+		free(temp->content);
+		temp->content = NULL;
 		return (NULL);
 	}
-	line = hold;
-	hold = NULL;
+	line = temp->content;
+	temp->content = NULL;
 	return (line);
 }
- 
